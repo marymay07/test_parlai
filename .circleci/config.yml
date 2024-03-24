@@ -49,6 +49,7 @@ commands:
           working_directory: ~/test_parlai/murmuration-ci
           command: |
             pwd 
+            ls
 
 jobs:
   terraform_infra:
