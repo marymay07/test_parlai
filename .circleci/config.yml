@@ -44,11 +44,12 @@ commands:
 
   terra_commands:
     description: Run all terraform commands
-    working_directory: ~/test_parlai/murmuration-ci
     steps:
-      - run: |
-          terraform init
-          terraform plan 
+      - run:
+          working_directory: ~/test_parlai/murmuration-ci
+          command: |
+            terraform init
+            terraform plan 
 
 jobs:
   terraform_infra:
