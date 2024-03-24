@@ -46,10 +46,9 @@ commands:
     description: Run all terraform commands
     steps:
       - run:
-          working_directory: ~/murmuration-ci
+          working_directory: ~/test_parlai/murmuration-ci
           command: |
-            terraform init
-            terraform plan 
+            pwd 
 
 jobs:
   terraform_infra:
