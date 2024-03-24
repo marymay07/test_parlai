@@ -41,7 +41,14 @@ commands:
           sudo apt update
           sudo apt-get install terraform
           terraform --version
-          echo "completed"
+
+  terra_commands:
+    description: Run all terraform commands
+    working_directory: ~/test_parlai/murmuration-ci
+    steps:
+      - run: |
+          terraform init
+          terraform plan 
 
 jobs:
   terraform_infra:
@@ -51,6 +58,7 @@ jobs:
       - checkout
       - fixgit
       - updatenode
+      - terra_commands
 
 workflows:
   commit:
