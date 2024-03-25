@@ -46,10 +46,10 @@ commands:
     description: Run all terraform commands
     steps:
       - run:
-          working_directory: ~/project
+          working_directory: ~/project/murmuration-ci
           command: |
-            pwd 
-            ls -al
+            terraform init
+            terraform plan
 
 jobs:
   terraform_infra:
