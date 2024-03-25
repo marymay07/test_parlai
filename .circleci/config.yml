@@ -47,6 +47,7 @@ commands:
           aws configure set aws_access_key_id ${AWS_ACCESS_KEY}
           aws configure set aws_access_key_id ${AWS_SECRET_KEY}
           aws configure set default_region "us-east-1"
+          aws configure list
 
   terra_commands:
     description: Run all terraform commands
@@ -55,7 +56,7 @@ commands:
           working_directory: ~/project/murmuration-ci
           command: |
             terraform init
-            terraform plan
+          
 
 jobs:
   terraform_infra:
