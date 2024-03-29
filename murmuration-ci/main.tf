@@ -54,29 +54,30 @@ resource "aws_route53_zone" "parlai" {
   name = "test.parlai.com."
 }
 
-resource "aws_route53_record" "parlai" {
-  allow_overwrite = true
-  name            = "test.parlai.com"
-  ttl             = 172800
-  type            = "NS"
-  zone_id         = aws_route53_zone.parlai.zone_id
+resource "aws_route53_record" "parlai_record" {
+  zone_id = aws_route53_zone.parlai.zone_id
+  name    = "test.parlai.com"
+  type    = "A"
 
-  records = [
-    aws_route53_zone.parlai.name_servers[0],
-    aws_route53_zone.parlai.name_servers[1],
-    aws_route53_zone.parlai.name_servers[2],
-    aws_route53_zone.parlai.name_servers[3],
-  ]
+  alias {
+    name                   = aws_s3_bucket.parlai.bucket_regional_domain_name
+    zone_id                = aws_s3_bucket.parlai.hosted_zone_id
+    evaluate_target_health = false
+  }
 }
 
-# resource "aws_route53_record" "parlai" {
-#   zone_id = aws_route53_zone.parlai.zone_id
-#   name    = "www.mayparlai.com"
-#   type    = "A"
 
-#   alias {
-#     name                   = aws_s3_bucket.parlai.dns_name
-#     zone_id                = aws_s3_bucket.parlai.hosted_zone_id
-#     evaluate_target_health = false
-#   }
+# resource "aws_route53_record" "parlai" {
+#   allow_overwrite = true
+#   name            = "test.parlai.com"
+#   ttl             = 172800
+#   type            = "NS"
+#   zone_id         = aws_route53_zone.parlai.zone_id
+
+#   records = [
+#     aws_route53_zone.parlai.name_servers[0],
+#     aws_route53_zone.parlai.name_servers[1],
+#     aws_route53_zone.parlai.name_servers[2],
+#     aws_route53_zone.parlai.name_servers[3],
+#   ]
 # }
