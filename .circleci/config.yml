@@ -55,10 +55,11 @@ commands:
       - run:
           working_directory: ~/project/murmuration-ci
           command: |
+            terraform init
             terraform plan
             terraform apply --auto-approve
-    
-          
+
+
 jobs:
   terraform_infra:
     executor: small_cpu39
