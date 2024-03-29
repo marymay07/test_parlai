@@ -1,10 +1,17 @@
 resource "aws_s3_bucket" "parlai" {
   bucket = "may3parl.ai"
 
-
   tags = {
     Name        = "My bucket"
     Environment = "parlai Dev"
+  }
+}
+
+resource "aws_s3_bucket_website_configuration" "parlai" {
+  bucket = aws_s3_bucket.parlai.id
+
+  index_document {
+    suffix = "index.html"
   }
 }
 
@@ -39,4 +46,22 @@ resource "aws_s3_object" "index_html" {
   bucket = aws_s3_bucket.parlai.id
   key = "index.html"
   source = "${path.module}/index.html"
+}
+
+# Route53 
+
+resource "aws_route53_zone" "parlai" {
+  name = "parlai.com."
+}
+
+resource "aws_route53_record" "parlai" {
+  zone_id = aws_route53_zone.parlai.zone_id
+  name    = "www.mayparlai.com"
+  type    = "A"
+
+  alias {
+    name                   = aws_s3_bucket.parlai.website_domain
+    zone_id                = aws_s3_bucket.parlai.hosted_zone_id
+    evaluate_target_health = false
+  }
 }
