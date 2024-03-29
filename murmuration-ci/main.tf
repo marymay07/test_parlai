@@ -47,6 +47,7 @@ resource "aws_s3_object" "index_html" {
   key = "index.html"
   source = "${path.module}/index.html"
 }
+#
 
 # Route53 
 
@@ -60,7 +61,7 @@ resource "aws_route53_record" "parlai_record" {
   type    = "A"
 
   alias {
-    name                   = aws_s3_bucket.parlai.bucket_regional_domain_name
+    name                   = "may3parl.ai.s3.amazonaws.com"
     zone_id                = aws_s3_bucket.parlai.hosted_zone_id
     evaluate_target_health = false
   }
