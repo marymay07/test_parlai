@@ -1,22 +1,19 @@
 resource "aws_s3_bucket" "parlai" {
   bucket = "may3parl.ai"
-  website {
-    index_document = "index.html"
-    # error_document = "error.html"
-  }
+ 
   tags = {
     Name        = "My bucket"
     Environment = "parlai Dev"
   }
 }
 
-# resource "aws_s3_bucket_website_configuration" "parlai" {
-#   bucket = aws_s3_bucket.parlai.id
+resource "aws_s3_bucket_website_configuration" "parlai" {
+  bucket = aws_s3_bucket.parlai.id
 
-#   index_document {
-#     suffix = "index.html"
-#   }
-# }
+  index_document {
+    suffix = "index.html"
+  }
+}
 
 resource "aws_s3_bucket_ownership_controls" "parlai" {
   bucket = aws_s3_bucket.parlai.id
@@ -50,6 +47,7 @@ resource "aws_s3_object" "index_html" {
   key = "index.html"
   source = "${path.module}/index.html"
   acl = "public-read"
+  content_type = "text/html"
 }
 #
 
