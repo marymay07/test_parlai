@@ -51,7 +51,7 @@ resource "aws_s3_object" "index_html" {
 # Route53 
 
 resource "aws_route53_zone" "parlai" {
-  name = "test.parlai.com."
+  name = "test.parlai.com"
 }
 
 resource "aws_route53_record" "parlai_record" {
