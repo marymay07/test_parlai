@@ -1,1 +1,2 @@
-murmuration-cr/.terraform/provider/
+murmuration-ci/.terraform/
+test
