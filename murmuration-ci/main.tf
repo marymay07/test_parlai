@@ -60,22 +60,6 @@ resource "aws_route53_zone" "parlai" {
 resource "aws_route53_record" "parlai_record" {
   zone_id = aws_route53_zone.parlai.zone_id
   name    = "test.parlai.com"
-  type    = "A"
-
-  alias {
-    name                   = "may3parl.ai.s3-website-us-east-1.amazonaws.com"
-    zone_id                = aws_s3_bucket.parlai.hosted_zone_id
-    evaluate_target_health = true
-  }
-}
-
-resource "aws_route53_zone" "parlai2" {
-  name = "mparlai.com"
-}
-
-resource "aws_route53_record" "parlai_record2" {
-  zone_id = aws_route53_zone.parlai2.zone_id
-  name    = "mparlai.com"
   type    = "CNAME"
 
   alias {
