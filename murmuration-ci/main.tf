@@ -61,7 +61,7 @@ resource "aws_route53_record" "parlai_record" {
   type    = "A"
 
   alias {
-    name                   = "may3parl.ai.s3.amazonaws.com"
+    name                   = "bucket-may3parl.ai.s3.amazonaws.com"
     zone_id                = aws_s3_bucket.parlai.hosted_zone_id
     evaluate_target_health = false
   }
