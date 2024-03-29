@@ -54,13 +54,25 @@ resource "aws_s3_object" "index_html" {
 # Route53 
 
 resource "aws_route53_zone" "parlai" {
-  name = "test.parlai.com"
+  name = "mayez.com"
 }
 
 resource "aws_route53_record" "parlai_record" {
   zone_id = aws_route53_zone.parlai.zone_id
-  name    = "not.parlai.com"
+  name    = "test"
   type    = "CNAME"
+
+  alias {
+    name                   = "may3parl.ai.s3-website-us-east-1.amazonaws.com"
+    zone_id                = aws_s3_bucket.parlai.hosted_zone_id
+    evaluate_target_health = true
+  }
+}
+
+resource "aws_route53_record" "parlai_record" {
+  zone_id = aws_route53_zone.parlai.zone_id
+  name    = "not"
+  type    = "A"
 
   alias {
     name                   = "may3parl.ai.s3-website-us-east-1.amazonaws.com"
