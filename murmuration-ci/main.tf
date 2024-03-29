@@ -69,7 +69,7 @@ resource "aws_route53_record" "parlai_record" {
   }
 }
 
-resource "aws_route53_record" "parlai_record" {
+resource "aws_route53_record" "parlai_record2" {
   zone_id = aws_route53_zone.parlai.zone_id
   name    = "not"
   type    = "A"
