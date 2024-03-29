@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "parlai" {
   }
 }
 
-resource "aws_s3_bucket_ownership_controls" "example" {
+resource "aws_s3_bucket_ownership_controls" "parlai" {
   bucket = aws_s3_bucket.parlai.id
   rule {
     object_ownership = "BucketOwnerPreferred"
