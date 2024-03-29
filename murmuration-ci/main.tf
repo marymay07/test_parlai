@@ -59,9 +59,9 @@ resource "aws_route53_record" "parlai" {
   name    = "www.mayparlai.com"
   type    = "A"
 
-  alias {
-    name                   = aws_s3_bucket.parlai.website_domain
-    zone_id                = aws_s3_bucket.parlai.hosted_zone_id
-    evaluate_target_health = false
-  }
+  # alias {
+  #   name                   = aws_s3_bucket.parlai.dns_name
+  #   zone_id                = aws_s3_bucket.parlai.hosted_zone_id
+  #   evaluate_target_health = false
+  # }
 }
