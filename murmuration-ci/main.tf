@@ -46,7 +46,7 @@ resource "aws_s3_object" "index_html" {
   bucket = aws_s3_bucket.parlai.id
   key = "index.html"
   source = "${path.module}/index.html"
-  # acl = "public-read"
+  acl = "public-read"
   content_type = "text/html"
 }
 #
@@ -59,7 +59,7 @@ resource "aws_route53_zone" "parlai" {
 
 resource "aws_route53_record" "parlai_record" {
   zone_id = aws_route53_zone.parlai.zone_id
-  name    = "test.parlai.com"
+  name    = "not.parlai.com"
   type    = "CNAME"
 
   alias {
