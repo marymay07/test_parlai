@@ -51,17 +51,32 @@ resource "aws_s3_object" "index_html" {
 # Route53 
 
 resource "aws_route53_zone" "parlai" {
-  name = "parlai.com."
+  name = "test.parlai.com."
 }
 
 resource "aws_route53_record" "parlai" {
-  zone_id = aws_route53_zone.parlai.zone_id
-  name    = "www.mayparlai.com"
-  type    = "A"
+  allow_overwrite = true
+  name            = "test.parlai.com"
+  ttl             = 172800
+  type            = "NS"
+  zone_id         = aws_route53_zone.parlai.zone_id
 
-  # alias {
-  #   name                   = aws_s3_bucket.parlai.dns_name
-  #   zone_id                = aws_s3_bucket.parlai.hosted_zone_id
-  #   evaluate_target_health = false
-  # }
+  records = [
+    aws_route53_zone.parlai.name_servers[0],
+    aws_route53_zone.parlai.name_servers[1],
+    aws_route53_zone.parlai.name_servers[2],
+    aws_route53_zone.parlai.name_servers[3],
+  ]
 }
+
+# resource "aws_route53_record" "parlai" {
+#   zone_id = aws_route53_zone.parlai.zone_id
+#   name    = "www.mayparlai.com"
+#   type    = "A"
+
+#   alias {
+#     name                   = aws_s3_bucket.parlai.dns_name
+#     zone_id                = aws_s3_bucket.parlai.hosted_zone_id
+#     evaluate_target_health = false
+#   }
+# }
