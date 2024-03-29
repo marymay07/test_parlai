@@ -56,7 +56,7 @@ commands:
           working_directory: ~/project/murmuration-ci
           command: |
             terraform init
-            terraform destroy --auto-approve
+            terraform apply --auto-approve
 
 
 jobs:
